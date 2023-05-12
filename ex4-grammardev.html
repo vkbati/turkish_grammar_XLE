@@ -1,0 +1,149 @@
+<html>
+<head>
+<title>Exercise 4</title>
+</head>
+
+<body>
+
+<center><h1>Exercise 4, Grammar Development</h1></center>
+
+<p>For this exercise you can work
+  with  <a href="grammar3.html">grammar3.lfg</a>, which contains first
+  rules for adjectives and more complex rules for PPs. The grammar
+  also makes a start on integrating punctuation. Note that XLE is set
+  up to use a default tokenizer if nothing else is specified. In the past we
+  have sometimes had trouble with the tokenizer.  If you find yourself having
+  trouble use the tokenizers provided as part of the ParGram Starter
+  Grammar. You need to download basic-parse-tok.fst and
+  default-gen-tokenizer.fst and store them in the same place as your grammar (or
+  store them elsewhere and adjust the paths in the MORPHOLOGY section of your
+  grammar accordingly). Our grammar3.lfg has an appropriate command for the
+  integration of these tokenziers in the
+  MORPHOLOGY section which you would simply need to uncomment. 
+
+<h2>Adjectives and Adverbs</h2>
+
+<p> Expand your grammar so that  it includes Adjectives and Adverbs.
+That is, the  following sentences should also work (and provide sound
+  linguistic analyses).  
+<ul>
+
+<li> the small dog slept 
+
+<li> the small black dog slept
+
+<li> the small black hungry dog ate bones 
+
+<li> the gorilla devoured the banana quickly
+
+<li> the small black hungry dog ate bones quickly
+
+<li> the very small gorilla slept 
+
+<li> the very very very small gorilla slept 
+
+<li> the dog was given a bone by the girl
+
+<li> a bone was given to the dog by the girl 
+
+</ul>
+
+<p> You will need to add adverbs to your lexicon and make sure that
+you expand your rules to allow adverbs.  Note that you should also
+change your treatment of adjectives, so that you have something like
+the following:
+
+<pre>
+NP --> (D)
+       AP*: ! $ (^ ADJUNCT);
+       N. 
+
+AP --> Adv*: ! $ (^ ADJUNCT);
+      A.
+</pre>
+
+<p>That is, you should introduce an Adjective Phrase (AP) and allow
+ adverbs to modify adjectives within this AP. 
+
+<p>At the moment, the grammar does not include a treatment of commas. You should
+expand the grammar to include a treatment of commas inbetween the adjectives,
+see the section on Punctuation below. 
+
+<h2>PPs and constraining equations</h2>
+
+<p>The grammar <a href="grammar3.html">grammar3.lfg</a>
+  already contains a start on implementing PPs.  Overall, you should
+  be able to treat three kinds of PPs:  Adjuncts (with semantic Ps),
+  OBLs with both semantic and non-semantic Ps. 
+
+<p>The following sentences should work. Note that some of them will
+  get more than one possible reading.  This is okay as long as the
+  correct one is among them.  We will learn next time how to constrain
+  the space of possibilities. 
+
+<ul>
+
+<li>the gorilla waited on the bench
+
+<li>the zookeeper waited on the gorilla 
+
+<li>the gorilla put the banana in the cage
+
+<li>the gorilla in the cage devoured a banana
+
+<li>the gorilla devoured a banana in the cage
+
+<li>a banana was put in the cage by the gorilla
+
+<li>the zookeeper waited by the bench 
+
+<li>the zookeeper waited by the bench in the garden 
+
+</ul>
+
+<p>Note that in addition to the PPs in the VP, which are already there to some
+  extent in <i>grammar5.lfg</i>, you are required to provide for the
+  possibilities of PPs within an NP.  
+
+
+ <h2>Punctuation</h2>
+
+  <p>The grammar has made a start on integrating punctuation. You can
+  add in more types.  Here are some sample lexical entries.  You will need
+  to add them to appropriate places in the c-structure rules. Note
+  that STMT-TYPE stands for "Statment Type".  
+
+ <pre>
+.  PERIOD  * (^ STMT-TYPE) = declarative.
+
+,  COMMA * . 
+
+!  EXCL * (^ STMT-TYPE) = exclamation. 
+
+?  QM * (^ STMT-TYPE) = interrogative. 
+</pre>
+
+  <p>Change your grammar so that the following sentence works:
+
+  <ul>
+    <li>the small, black, dog slept. 
+    
+  </ul> 
+
+
+
+<hr>
+
+<h2>Relevant Reading Material</h2>
+
+<ul>
+
+  <li>Chapter 10, Dalrymple (2001)
+
+  <li>Cookbook, p 125-129
+
+  </ul>
+
+</body>
+</html>
+

@@ -1,0 +1,73 @@
+#this is testsuite3.lfg
+
+#for parse-testfile to work, make sure there is a blank line between the comment and the sentence to be parsed
+
+# punctuation
+
+the dog devours a bone.
+
+the dog appeared.
+
+#adjectives
+
+the small dog appeared.
+
+the small grey dog appeared
+
+the small grey smart dog appeared
+
+#PPs 
+
+the gorilla waited on the dog
+
+the gorilla slept on the dog
+
+the dog slept on the bed
+
+
+#ditransitives
+
+the gorilla gives a bone to the dog
+
+the gorilla gives the dog a bone
+
+a bone was given to the dog
+
+a bone was given to the dog by the gorilla
+
+the dog was given a bone
+
+the dog was given a bone by the gorilla
+
+#active 
+
+the dog devours a bone (1 0.000 13)
+
+
+#passive version 
+
+a bone was devoured by the dog  (1 0.000 18)
+
+
+# unification failure, subject-verb agreement (consistency)
+
+the dogs devours bones   (0 0.010 11)
+
+# coherence violation
+
+the dog appears bones  (0 0.000 0)
+
+# completeness violation
+
+the dog devours  (0 0.000 8)
+
+# missing PRED value, completeness violation
+
+the dog devours a bone (1 0.000 13)
+
+#missing rules, unknown words
+
+the dog devours bones in the park (0 0.000 0)
+
+
+# 7 sentences, 0.010 CPU secs total, 0.010 CPU secs max (10/06/14)
