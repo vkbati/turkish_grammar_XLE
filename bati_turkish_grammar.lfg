@@ -1,0 +1,470 @@
+xDEMO	TURKISH	   CONFIG  (1.0)
+  CHARACTERENCODING "iso-8859-1" utf-8.
+  ROOTCAT   S.
+  FILES	    common.templates.lfg.
+  LEXENTRIES (DEMO TURKISH).
+  TEMPLATES (DEMO TURKISH).
+  RULES	    (DEMO TURKISH).
+  GOVERNABLERELATIONS    SUBJ OBJ OBJ2 OBJ-TH OBL OBL-?+ COMP XCOMP.
+  SEMANTICFUNCTIONS	 ADJUNCT  TOPIC.
+  NONDISTRIBUTIVES    NUM PERS CASE COORD COORD-FORM.
+  EPSILON   e.
+  OPTIMALITYORDER	+PROSUBJ +ACC.
+
+----
+
+DEMO TURKISH RULES (1.0)
+
+	S --> 	 (e: (^ SUBJ PRED) = 'pro')		
+		 (NP: @GF
+		 (^SUBJ CASE) = nom)*,			"shuffle operator to make free word order happen"
+		 {VC
+		 |AP*: ! $ (^ ADJUNCT);
+		 COPC}
+		 {(PERIOD)|(EXCL)}.
+	
+	NP -->   AP*: ! $ (^ ADJUNCT);
+		 (D)
+		 {N:  (^CASE) = nom
+		      (SUBJ ^)				"subj should be nom case"
+		 | NPposs Nbar 
+	         | Nbar 
+		 | PRON: (SUBJ ^)}.			"the pron is optional here under the circumstance of not"
+		   	       				"being followed by any suffix. If the pron takes a suffix"
+							"it can undertake other roles than subject"
+							
+	AP --> {AdjP|AdvP}.
+	
+	AdjP --> Adj.
+	
+	AdvP --> Adv.
+	
+			   
+	Nbar --> {N|PRON|VNom}				"where we combine inflectional and derivational suffixes
+ 	     	 					with nouns"
+	     	 SFNoun.
+
+	Vbar --> V					"where we combine inflectional and derivational suffixes
+							 with verbs"
+	     	 SFVerb.
+
+	VLightBar --> 	Vlight
+	(SFVerb).
+	
+	VC --> AP*: ! $ (^ ADJUNCT);
+	       { V
+	       | Vbar
+	       | Vlightcomplex}.
+
+	Vlightcomplex --> N:(!CASE)= nom		"the rule for N-V compound complex predicates"
+		          (!NUM)=sg
+			  (! PERS)=3
+			  ~(! SPEC POSS)
+			  ^\PRED\SUBJ=!\PRED\SUBJ\CASE\NUM\PERS\NTYPE  "restriction operator"
+			  (! PRED)= (^ PRED ARG2);
+			  VLightBar : ^=!.
+	
+	
+	COPC -->	COP			"specifically created for 'değil', copular verb"
+			SFV1*
+			(SFV2)
+			{SFV3
+			|e: (^ SUBJ PERS) = 3
+			(^ SUBJ NUM) = sg}.
+			 
+	SFNoun -->	(SFN1)			"the rule for the relationship of noun suffixes with each other"
+			(SFN2)
+			(SFN3).
+			 
+	SFVerb -->	 (SFVNEG)		 "the rule for the relationship of verb suffixes with each other"
+			 SFV1*
+			 (SFV2)
+			 {SFV3
+			 |e: (^ SUBJ PERS) = 3	"'e' is implemented as the third person singular suffix, as this"
+			 (^ SUBJ NUM) = sg}.   	"is marked in Turkish as an omission"
+			 
+
+	NPposs --> Nbar: (^ SPEC POSS)=!.
+	
+----
+
+DEMO TURKISH TEMPLATES (1.0)
+
+
+OT-MARK(_mark) = "assigns an OT mark, from common templates"
+       _mark $ o::*.
+
+
+DITRANS(P) = (^ PRED)='P<(^ SUBJ) (^ OBJ) (^ OBJ-TH)>'.
+
+TRANS(P) = (^ PRED)='P<(^ SUBJ) (^ OBJ)>'.
+
+INTRANS(P) = (^ PRED) = 'P<(^SUBJ)>'.        
+
+TENSE(T) = (^ TENSE) = T.
+
+CASE(C) = (^ CASE) = C.   
+
+PRED(P) = (^ PRED) = 'P'. 
+ 
+PRON(P Z  N T) = (^ PRED) = 'P'
+	       	 (^ NUM) = N
+	  	 (^ PERS) = Z
+	  	 (^ PRON-TYPE) = T
+	  	 (^ NTYPE) = pron. 
+
+DEF = (^ DEF).
+
+GF = {(^ SUBJ) = ! | (^ OBJ) = ! | (^ OBJ-TH) = !}.
+
+NOUN(P) =  {@(PRED P) | (^ PRED) = 'P<(^ SUBJ)>'|(^ PRED) = 'P<(^ OBJ)>' | (^ PRED) = 'P<(^ OBJ-TH)>'}.
+
+----
+
+DEMO TURKISH LEXICON (1.0)
+
+"nouns"
+
+kitap			N	*	@(NOUN kitap).
+
+mutlu		        N	*	@(NOUN mutlu).
+
+izin		    	N	*	@(NOUN izin).
+
+teşekkür	    	N	*	@(NOUN teşekkür).
+
+Ali		        N	*	@(NOUN ali)
+		  		  	(^ NTYPE) = prop.
+
+Ayşe		  	N       *	@(NOUN ayşe)
+					(^ NTYPE) = prop.
+
+top		   	N   	*       @(NOUN top).
+
+"verbs"
+
+oku			V	*	{@(TRANS oku)|@(DITRANS oku)|@(INTRANS oku)}.
+
+bak    		   	V	*	(^ PRED) = 'bak<(^ SUBJ)(^ OBJ-TH)>'.
+
+al         	   	V	*	@(TRANS al).
+
+vur		   	V	*	@(TRANS vur);
+		   	V	*	(^ PRED) = 'vur<(^ SUBJ) (^ OBJ-TH)>'.
+
+"light verbs"
+
+et			Vlight  *	(^ PRED) = 'et<(^ SUBJ) %PRED2>'. "light verbs made differently due to ambiguity of the second GF"
+
+ver	    	        Vlight  * 	(^ PRED) = 'ver<(^ SUBJ) %PRED2>'.
+
+"adjectives"
+
+güzel			Adj     *	@(PRED güzel).
+
+çirkin		      	Adj     * 	@(PRED çirkin).
+
+mavi		      	Adj     * 	@(PRED mavi).
+
+yuvarlak    	      	Adj     * 	@(PRED yuvarlak).
+
+"adverbs"
+
+sert			Adv     *	@(PRED sert).
+
+yavaş		        Adv     *  	@(PRED yavaş).
+
+"Verb-likes"
+
+bakma			VNom    *	@(PRED bakma).
+
+koşma			VNom    *	@(PRED koşma).
+
+
+"determiners"
+
+bir			D       *	@(DEF -).
+
+"pronouns"
+
+ben			PRON    *       @(PRON ben 1 sg ben).
+
+Ben         	       	PRON    *       @(PRON ben 1 sg ben).
+
+sen			PRON    *       @(PRON sen 2 sg sen).
+
+Sen			PRON    * 	@(PRON sen 2 sg sen).
+
+o			PRON    *       @(PRON o 3 sg o).
+
+O			PRON    * 	@(PRON o 3 sg o).
+
+biz			PRON    * 	@(PRON biz 1 pl biz).
+
+Biz			PRON    *       @(PRON biz 1 pl biz).
+
+siz			PRON    * 	@(PRON siz 2 pl siz).
+
+Siz			PRON    * 	@(PRON siz 2 pl siz).
+
+onlar			PRON    * 	@(PRON onlar 3 pl onlar).
+
+Onlar			PRON    *       @(PRON onlar 3 pl onlar).
+
+
+
+"SuffixVerbExample"
+
+"""-ıl			SFV 	*	(^ PASS) = +.
+
+-il			SFV	*	(^ PASS) = +.
+
+-un			SFV 	*	(^ REF) = +;    
+			SFN 	*  	(^ CASE) = gen.
+-iş			SFV 	*	(^ REC) = +.     """
+
+
+"SuffixVerbNEG, negative"
+
+-ma			SFVNEG  *       (^ NEG) = +.
+
+-me         		SFVNEG  *       (^ NEG) = +.
+
+-mu			SFVNEG  *      	(^ NEG) = +.
+
+-mı			SFVNEG  *      	(^ NEG) = +.
+
+-mi			SFVNEG  *       (^ NEG) = +.
+
+
+"SuffixVerb1, modals"
+
+-meli			SFV1	*	(^ MODAL) = should.
+
+-malı			SFV1  	*  	(^ MODAL) = should.
+
+-ebil			SFV1  	*  	(^ MODAL) = can.
+
+-abil			SFV1 	 * 	(^ MODAL) = can.
+
+
+"SuffixVerb2, aspects and tenses"
+
+-ir			SFV2 	*	(^ TENSE) = pres.
+
+-yor	      	      	SFV2    *       (^ TENSE) = present
+					(^ ASP) = progressive.
+					
+-muş			SFV2	*	(^ TENSE) = past
+					(^ ASP) = narrative.
+
+-mış			SFV2	*	(^ TENSE) = past
+					(^ ASP) = narrative.
+
+-miş			SFV2	*	(^ TENSE) = past
+					(^ ASP) = narrative.
+
+-tı			SFV2	*	(^ TENSE) = past
+					(^ ASP) = definite.
+
+-ti			SFV2	*	(^ TENSE) = past
+					(^ ASP) = definite.
+
+-dı			SFV2	*	(^ TENSE) = past
+					(^ ASP) = definite.
+						
+-du			SFV2	*	(^ TENSE) = past
+					(^ ASP) = definite.
+
+-di			SFV2	*	(^ TENSE) = past
+					(^ ASP) = definite.
+
+-ydi			SFV2	*	(^ TENSE) = past
+					(^ ASP) = definite.
+
+
+
+"SuffixVerb3, person and number suffixes"
+
+-im			SFV3  *	        (^SUBJ PERS) = 1
+					(^SUBJ NUM) = sg;
+			SFN3  *		(^ POSS) = +
+					(^ PERS) = 1
+					(^ NUM) = sg.
+
+-ım			SFV3  *     	(^SUBJ PERS) = 1
+					(^SUBJ NUM) = sg;
+			SFN1  *		(^ POSS) = +
+					(^ PERS) = 1
+					(^ NUM) = sg.
+
+
+-um			SFV3  *         (^SUBJ PERS) = 1
+					(^SUBJ NUM) = sg.
+						
+-m     			SFV3  *         (^SUBJ PERS) = 1
+					(^SUBJ NUM) = sg.
+
+-n     			SFV3  *         (^SUBJ PERS) = 2
+					(^SUBJ NUM) = sg.
+					
+-sun			SFV3  *         (^SUBJ PERS) = 2
+					(^SUBJ NUM) = sg.
+
+-sın			SFV3  *         (^SUBJ PERS) = 2
+					(^SUBJ NUM) = sg.
+					
+					
+-uz			SFV3  *         (^SUBJ PERS) = 1
+					(^SUBJ NUM) = pl.
+							
+-k			SFV3  *         (^SUBJ PERS) = 1
+					(^SUBJ NUM) = pl.
+					
+-sunuz			SFV3  *         (^SUBJ PERS) = 2
+					(^SUBJ NUM) = pl.
+
+
+"SuffixNoun1, plural"
+					
+-ler			SFN1  *   (^ NUM) = pl;
+			SFV3  *   (^SUBJ PERS) = 3
+				  (^SUBJ NUM) = pl.
+
+-lar			SFN1  *   (^ NUM) = pl;
+			SFV3  *   (^SUBJ PERS) = 3
+				  (^SUBJ NUM) = pl.
+
+
+"SuffixNoun2, possessive marker"
+
+-sı	      		SFN2  *   (^ POSS) = +
+				  (^ PERS) = 3
+				  (^ NUM) = sg;
+			SFN3  *   (^ CASE) = gen. 
+					  
+-in			SFN2  *   (^ POSS) = +
+				  (^ PERS) = 2
+				  (^ NUM) = sg;
+			SFN3  *   (^ CASE) = gen. 
+					  
+-ın			SFN2  *   (^ POSS) = +
+				  (^ PERS) = 2
+				  (^ NUM) = sg;
+			SFN3  *   (^ CASE) = gen.
+
+-un 			SFN2  *   (^ POSS) = +
+				  (^ PERS) = 3
+				  (^ NUM) = sg.
+
+							  
+-imiz			SFN2  *   (^ POSS) = +
+				  (^ PERS) = 1
+				  (^ NUM) = pl.
+
+					  
+-ımız			SFN2  *   (^ POSS) = +
+				  (^ PERS) = 1
+				  (^ NUM) = pl.
+					  
+-iniz			SFN2  *   (^ POSS) = +
+				  (^ PERS) = 2
+				  (^ NUM) = pl.
+					  
+-ınız			SFN2  *   (^ POSS) = +
+				  (^ PERS) = 2
+				  (^ NUM) = pl.
+					  
+-leri			SFN2  *   (^ POSS) = +
+				  (^ PERS) = 3
+				  (^ NUM) = pl.
+					  
+-ları			SFN2  *   (^ POSS) = +
+				  (^ PERS) = 3
+				  (^ NUM) = pl.
+					  
+					  
+"SuffixNoun3, case markers"
+
+-ı			SFN3  *   (^ CASE) = acc	     "accusative"
+			          (OBJ ^)  @(OT-MARK ACC);   "this ot mark is put to prefer the acc case marker"
+			SFN2  *   (^ POSS) = +	     	     "over the possesive marker due to avoiding multiple"
+				  (^ PERS) = 3		     "ambigious parses"
+				  (^ NUM) = sg.
+
+-i			SFN3  *   (^ CASE) = acc
+				  (OBJ ^) @(OT-MARK ACC);
+			SFN2  *   (^ POSS) = +
+				  (^ PERS) = 3
+				  (^ NUM) = sg.
+		
+
+-ü			SFN3  *   (^ CASE) = acc
+				  (OBJ ^).
+
+-nı			SFN3  *   (^ CASE) = acc
+				  (OBJ ^).	 
+
+-u			SFN3  *   (^ CASE) = acc
+				  (OBJ ^).
+
+-e			SFN3  *   (^ CASE) = dat
+			      	  (OBJ-TH ^).        "dative"
+					  
+-ye			SFN3  *   (^ CASE) = dat
+			      	  (OBJ-TH ^).
+
+-a			SFN3  *   (^ CASE) = dat
+			      	  (OBJ-TH ^).
+					  
+-na			SFN3  *   (^ CASE) = dat
+			      	  (OBJ-TH ^).
+
+-te			SFN3  *   (^ CASE) = loc.    "locative"
+
+-ta			SFN3  *   (^ CASE) = loc.	
+
+-de 			SFN3  *   (^ CASE) = loc.	
+
+-da			SFN3  *   (^ CASE) = loc.
+
+-ten			SFN3  *   (^ CASE) = abla.   "ablative"					  
+
+-den			SFN3  *   (^ CASE) = abla.						  
+
+-tan			SFN3  *   (^ CASE) = abla.						  
+
+-dan			SFN3  *   (^ CASE) = abla.
+
+-ün 			SFN3  *   (^ CASE) = gen.	"genitive"
+
+-nin			SFN3  *   (^ CASE) = gen.
+
+-nın			SFN3  *   (^ CASE) = gen.
+
+-nün			SFN3  *   (^ CASE) = gen.
+
+-nun			SFN3  *   (^ CASE) = gen.
+
+-le 			SFN3  *   (^ CASE) = instr.  "instrumental"
+
+-la 			SFN3  *   (^ CASE) = instr.					  
+
+"auxiliaries"
+
+değil			COP   *	  {(^ PRED) = 'ol<(^ SUBJ)>'|(^ PRED) = 'ol<(^ OBJ)>'}  "negative marker which is a copular verb for nominal sentences"
+				  (^ NEG) = +.
+
+"punctuations"
+
+.			PERIOD *  (^ STMT-TYPE) = declarative. 
+
+!  			EXCL *    (^ STMT-TYPE) = exclamation. 
+
+
+----
+
+
+
+
+

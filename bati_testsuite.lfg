@@ -1,0 +1,217 @@
+#this is turkish_final.lfg
+
+#basic sentences
+
+Ali kitap -ı oku -yor (1+1 0.005 22)
+
+#Ali is reading a book
+
+ben kitap -ı oku -yor -um (1+1 0.001 24)
+
+#I am reading a book
+
+o kitap -ı oku -yor (1+1 0.001 22)
+
+#He / she is reading a book
+
+# testing subj-verb agr
+
+sen kitap -ı oku -yor -um (0 0.002 24)
+
+#(should not parse) You are read - (pres/prog - 1st prsn sg) a book
+
+#testing the shuffle operator
+
+oku -yor -sun kitap -ı (1+1 0.001 21)
+
+# You are reading a book
+
+oku -yor o kitap -ı (1+1 0.001 22)
+
+# He is reading a book
+
+oku -yor Ali kitap -ı (1+1 0.001 22)
+
+# He is reading o book
+
+#testing more than one suffixes and tenses
+
+Ali kitap -ı -nı oku -yor (1 0.001 21)
+
+# Ali is reading his book
+
+Ali -nin kitap -ı -nı al -dı -m (1 0.002 33)
+
+# I took Ali's book
+
+Ali -ye bak -tı -m (1 0.001 18)
+
+# I looked at Ali
+
+Ben top -a vur -du -m (1 0.001 21)
+
+# I hit the ball
+
+#testing adj. and adv.
+
+Sen mavi top -a sert vur -muş -sun (1 0.001 29)
+
+# I heard that you hit the blue ball hard 
+
+# We added 'I heard that' for the translation of '-muş'. Although this is slightly inaccurate we wanted to include the narrative aspect for our translation
+
+sert vur -muş -sun sen mavi top -a (1 0.002 29)
+
+# I heard that you hit the blue ball hard
+
+#testing empty categories (subj drop)
+
+oku -du -m (1 0.001 11)
+
+#I read
+
+kitap -ı oku -du (1+2 0.001 19)
+
+# He / she read the book
+
+Ali -ye kitap -ı oku -du (1+1 0.002 32)
+
+# He / she read the book to Ali
+
+o Ali -ye kitap -ı oku -muş (1+1 0.002 34)
+
+# I heard that he /she read the book to Ali
+
+Ayşe kitap -ı oku -du. (1+1 0.002 24)
+
+#Ayşe read the book
+
+#negation
+
+Ali kitap -ı oku -ma -dı (1+1 0.002 24)
+
+#Ali did not read the book
+
+güzel kitap -ı oku -ma -dı -m (1+1 0.001 27)
+
+#I did not read the beautiful book
+
+o -nun kitap -ı değil (1 0.001 28)
+
+#It is not his/her book
+
+güzel kitap -ı oku -ma -dı -m (1+1 0.001 27)
+
+#I did not read the beautiful book
+
+Ali kitap -ı oku -ma -malı (1+1 0.001 24)
+
+#Ali should not read the book
+
+kitap -ı oku -mu -yor (1+2 0.001 21)
+
+#He/She is not reading the book
+
+sen kitap -ı oku -ma -mış -sın (1+1 0.001 26)
+
+#I heard that you did not read the book
+
+kitap -ı oku -ma -ma -dı (0 0.001 0)
+
+#(should not parse) He/she did not not read the book
+
+oku -ma -dı kitap -ı o (1+1 0.001 24)
+
+#He/she did not read the book
+
+o kitap -lar -ı oku -dı -ma (0 0.001 0)
+
+#(should not parse, wrong morphological order) He/she did not read the books
+
+güzel değil -im (1 0.001 11)
+
+#I am not beautiful
+
+güzel değil o (1 0.001 12)
+
+#He/she is not beautiful
+
+o güzel değil -me -di (0 0.001 0)
+
+#(should not parse double negation) He/she was not not beautiful
+
+o güzel değil -di (1 0.001 14)
+
+#He/she was not beautiful
+
+o top -lar -a vur -mu -yor (1 0.001 23)
+
+#He/she is not hitting the balls
+
+# N-V compound complex predicates
+
+Ali Ayşe -e izin ver -di (1 0.002 22)
+
+#Ali gave permission to Ayşe
+
+Ayşe -e Ali izin ver -di (1 0.002 22)
+
+#Ali gave permission to Ayşe
+
+Ali izin Ayşe -e ver -di (0 0.001 0)
+
+#(should not parse, N-V compound should not be seperated) Ali gave permission to Ayşe
+
+Ali Ayşe -nin koşma -sı -na izin ver -di (1 0.002 36)
+
+#Ali gave permission to Ayşe to run
+
+Ali Ayşe -nin koşma -sı -na izin ver -me -meli (1 0.002 38)
+
+#Ali should not give permission to Ayşe to run
+
+Ali Ayşe -nin koşma -sı -na izin ver -mi -yor (1 0.002 38)
+
+#Ali is not giving permission to Ayşe to run
+
+Sen teşekkür et -ti -n (1 0.001 17)
+
+#You thanked
+
+teşekkür et -ti -n (1 0.001 14)
+
+#You thanked
+
+O -na güzel teşekkür et -ti -n (1 0.001 25)
+
+#You thanked him/her beautifully
+
+güzel Ayşe -e teşekkür et -ti -m (1 0.001 25)
+
+#I thanked to beautiful Ayşe
+
+Ayşe ben -i  mutlu et -ti (1 0.002 25)
+
+#Ayşe made me happy
+
+Ayşe ben -i mutlu et -ti -meli (0 0.001 0)
+
+#(should not parse, wrong suffix order) Ayşe should have made me happy
+
+O -na ben teşekkür et -me -meli -ydi -m (1 0.001 28)
+
+#I should not have had thanked him/her
+
+Ayşe -e teşekkür -ü et -ti -m (0 0.001 0)
+
+#should not parse, noun part of the compound cannot take a suffix 
+
+#I thanked Ayşe(literal translation) 
+
+#I gave Ayşe one thank (one is the ungrammatical part because in Turkish suffix gives that info)
+
+o -nun koşma -sı -na izin ver -me -meli -ydi -m (1 0.002 40)
+
+#I should not have given permission to him/her to run
+
+# 48 sentences, 0.068 CPU secs total, 0.005 CPU secs max (08/31/23)

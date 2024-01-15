@@ -1,0 +1,13 @@
+set-character-encoding stdio utf-8
+create-parser bati_uzun_turkish_grammar.lfg
+parse-testfile bati_uzun_testsuite.lfg
+
+set showNumbers 0 ;# turns off node numbers in c-structure window
+set showFSNumbers 0 ;# turns off node numbers in f-structure window
+set xletreefont {Courier 16}
+set xletextfont {Courier 16}
+set xleuifont {Courier 16}
+set xlefsfont {Courier 16}
+#set showPredsOnlyFStruct 1
+#set showPredsOnlyFSChart 1
+#set backgroundColor white
